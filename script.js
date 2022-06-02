@@ -33,32 +33,6 @@ const newCell = document.createElement('div');
 
 document.addEventListener('keyup', clickControl);
 
-function clickControl(event) {
-    if (event.key === 'ArrowUp') {
-        console.log('Вы нажали клавишу вверх!')
-    } else if (event.key === 'ArrowLeft') {
-        console.log('Вы нажали клавишу влево!')
-    } else if (event.key === 'ArrowRight') {
-        console.log('Вы нажали клавишу вправо!')
-    } else {
-        console.log('Вы нажали клавишу вниз!');
-        }
-}
-
-class GameManager{
-    constructor(isGameOver, score, board) {
-        this.isGameOver = false;
-        this.score = 0;
-        this.board = null;
-    }
-    init() {
-        this.board = new Board();
-            document.addEventListener('keyup', clickControl);
-    }
-}
-
-const start = new GameManager();
-start.init();
 //checkIsGameOver();
 
 class Board {
@@ -69,17 +43,12 @@ class Board {
     }
 
     init() {
+        this.board = new Board();
+            document.addEventListener('keyup', clickControl);
+    }  
+
+    init() {
         const fragment = document.createDocumentFragment();
-    
-        for (let i = 0; i < this.width * this.width; i++) {
-            const square = document.createElement('div');
-            square.innerHTML = '';
-            square.className = 'grid-cell ';
-    
-            fragment.appendChild(square);
-            squares.push(square);
-        }
-        this.wrapper.appendChild(fragment);
     }
 }
 
@@ -105,4 +74,35 @@ class Cell {
 
     }
 }
+
+
+class GameManager{
+
+    constructor(isGameOver, score, board, clickControl) {
+        this.isGameOver = false;
+        this.score = 0;
+        this.board = null;
+    }
+
+    clickControl (event) {
+        if (event.key === 'ArrowUp') {
+            console.log('Вы нажали клавишу вверх!')
+        } else if (event.key === 'ArrowLeft') {
+            console.log('Вы нажали клавишу влево!')
+        } else if (event.key === 'ArrowRight') {
+            console.log('Вы нажали клавишу вправо!')
+        } else {
+            console.log('Вы нажали клавишу вниз!');
+            }
+    }
+
+    init() {
+        this.board = new Board();
+            document.addEventListener('keyup', clickControl);
+    }    
+}
+
+const start = new GameManager();
+start.init();
+
 
