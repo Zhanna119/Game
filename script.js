@@ -17,38 +17,26 @@ const colorCell = [
     '#d7d4f0',
 ];
 
-const newCell = document.createElement('div');
-    const grid = document.querySelector('.grid');
-    const fragment = document.createDocumentFragment();
-
-    for(let i = 0; i <= 15; i++) {
-        
-        var div = document.createElement('div');
-        fragment.appendChild(div);
-        newCell.className = 'cell';
-        div.classList.add('cell');
-    }
-    grid.appendChild(fragment);
-    
-
-document.addEventListener('keyup', clickControl);
-
 //checkIsGameOver();
 
 class Board {
-    constructor(widthBoard, squares, wrapper) {
+    constructor() {
         this.widthBoard = 4;
         this.squares = [];
         this.wrapper = document.querySelector('.grid');
     }
 
     init() {
-        this.board = new Board();
-            document.addEventListener('keyup', clickControl);
-    }  
-
-    init() {
         const fragment = document.createDocumentFragment();
+
+        for (let i = 0; i < this.widthBoard * this.widthBoard; i++) {
+            const square = document.createElement('div');
+            square.innerHTML = '';
+            square.className = 'cell';
+            fragment.appendChild(square);
+            this.squares.push(square);
+        }
+        this.wrapper.appendChild(fragment);
     }
 }
 
@@ -77,14 +65,13 @@ class Cell {
 
 
 class GameManager{
+        constructor() {
+            this.isGameOver = false;
+            this.score = 0;
+            this.board = null;
+        }
 
-    constructor(isGameOver, score, board, clickControl) {
-        this.isGameOver = false;
-        this.score = 0;
-        this.board = null;
-    }
-
-    clickControl (event) {
+    /*clickControl (event) {
         if (event.key === 'ArrowUp') {
             console.log('Вы нажали клавишу вверх!')
         } else if (event.key === 'ArrowLeft') {
@@ -93,16 +80,24 @@ class GameManager{
             console.log('Вы нажали клавишу вправо!')
         } else {
             console.log('Вы нажали клавишу вниз!');
-            }
-    }
+            }*/
+
+        clickControl (event) {
+            (event.key === 'ArrowUp') ? console.log('Вы нажали клавишу вверх!') :
+            (event.key === 'ArrowLeft') ? console.log('Вы нажали клавишу влево!') :
+            (event.key === 'ArrowRight') ? console.log('Вы нажали клавишу вправо!') :
+            console.log('Вы нажали клавишу вниз!');
+        }
 
     init() {
         this.board = new Board();
-            document.addEventListener('keyup', clickControl);
-    }    
-}
+            //document.addEventListener('keyup', clickControl);
+    }   
+} 
+
 
 const start = new GameManager();
 start.init();
+//document.addEventListener('keyup', clickControl);
 
 
