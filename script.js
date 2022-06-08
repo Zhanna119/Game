@@ -17,6 +17,7 @@ const colorCell = [
     '#d7d4f0',
 ];
 
+
 //checkIsGameOver();
 
 class Board {
@@ -71,33 +72,25 @@ class GameManager{
             this.board = null;
         }
 
-    /*clickControl (event) {
+    clickControl (event) {
         if (event.key === 'ArrowUp') {
             console.log('Вы нажали клавишу вверх!')
         } else if (event.key === 'ArrowLeft') {
             console.log('Вы нажали клавишу влево!')
         } else if (event.key === 'ArrowRight') {
             console.log('Вы нажали клавишу вправо!')
-        } else {
+        } else if (event.key === 'ArrowDown') {
             console.log('Вы нажали клавишу вниз!');
-            }*/
-
-        clickControl (event) {
-            (event.key === 'ArrowUp') ? console.log('Вы нажали клавишу вверх!') :
-            (event.key === 'ArrowLeft') ? console.log('Вы нажали клавишу влево!') :
-            (event.key === 'ArrowRight') ? console.log('Вы нажали клавишу вправо!') :
-            console.log('Вы нажали клавишу вниз!');
-        }
-
-    init() {
+            }
+    }
+        init() {
         this.board = new Board();
-            //document.addEventListener('keyup', clickControl);
-    }   
-} 
-
+        this.board.init();
+        document.addEventListener('keyup', clickControl);
+        } 
+    }      
 
 const start = new GameManager();
 start.init();
-//document.addEventListener('keyup', clickControl);
 
 
