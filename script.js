@@ -41,16 +41,39 @@ class Board {
     }
 }
 
-//generateNewCell();
-/*addColours() {
-    
-};*/
+function generateNewCell() {
+    const randomNumber = Math.floor(Math.random() * this.squares.length);
+
+    if (this.squares[randomNumber].innerHTML === '') {
+        this.squares[randomNumber].innerHTML = 2;
+        addColours();
+        // проверить на GameOver
+    } else {
+        this.generateNewCell();
+    }
+}  
+
+function addColours() {
+    for (let i = 0; i < this.squares.length; i++) {
+        this.squares[i].style.backgroundColor = colorCell[Math.trunc(Math.sqrt(this.squares[i].innerHTML))];
+    }
+}
 
 class Cell {
     constructor(value, dom) {
         this.value = '';
         this.dom = null;
     }
+
+    /*const fragment = document.createDocumentFragment();
+    
+    for (let i = 0; i < this.widthBoard * this.widthBoard; i++) {
+            const cell = new Cell;
+            fragment.appendChild(cell.getNewElement());
+            this.cells.push(cell);
+        }
+        this.wrapper.appendChild(fragment);*/
+
     getValue () {
         return this.value; 
     }
@@ -60,10 +83,14 @@ class Cell {
     }
 
     getNewElement() {
+        const square = document.createElement('div');
+        square.innerHTML = '';
+        square.className = 'grid-cell ';
+        this.dom = square;
 
+        return square;
     }
 }
-
 
 class GameManager{
         constructor() {
@@ -87,10 +114,13 @@ class GameManager{
     this.board = new Board();
     this.board.init();
     document.addEventListener('keyup', this.clickControl);
+    this.generateNewCell;
     } 
 }      
 
 const start = new GameManager();
 start.init();
+
+
 
 
