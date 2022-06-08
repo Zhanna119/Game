@@ -83,12 +83,12 @@ class GameManager{
             console.log('Вы нажали клавишу вниз!');
             }
     }
-        init() {
-        this.board = new Board();
-        this.board.init();
-        document.addEventListener('keyup', clickControl);
-        } 
-    }      
+    init() {
+    this.board = new Board();
+    this.board.init();
+    document.addEventListener('keyup', this.clickControl);
+    } 
+}      
 
 const start = new GameManager();
 start.init();
