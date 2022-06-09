@@ -31,11 +31,10 @@ class Board {
         const fragment = document.createDocumentFragment();
 
         for (let i = 0; i < this.widthBoard * this.widthBoard; i++) {
-            const square = document.createElement('div');
-            square.innerHTML = '';
-            square.className = 'cell';
-            fragment.appendChild(square);
-            this.squares.push(square);
+            const cell = new Cell;
+
+            fragment.appendChild(cell.getNewElement());
+            this.squares.push(cell);
         }
         this.wrapper.appendChild(fragment);
     }
@@ -64,15 +63,6 @@ class Cell {
         this.value = '';
         this.dom = null;
     }
-
-    /*const fragment = document.createDocumentFragment();
-    
-    for (let i = 0; i < this.widthBoard * this.widthBoard; i++) {
-            const cell = new Cell;
-            fragment.appendChild(cell.getNewElement());
-            this.cells.push(cell);
-        }
-        this.wrapper.appendChild(fragment);*/
 
     getValue () {
         return this.value; 
