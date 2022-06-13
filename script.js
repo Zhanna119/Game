@@ -19,6 +19,16 @@ const colorCell = [
 
 
 //checkIsGameOver();
+function generateNewCell() {
+    const randomNumber = Math.floor(Math.random() * this.squares.length);
+
+    if (this.squares[randomNumber].innerHTML === '') {
+        this.squares[randomNumber].innerHTML = 2;
+    } else {
+        this.generateNewCell();
+    }
+}  
+
 
 class Board {
     constructor() {
@@ -31,35 +41,37 @@ class Board {
         const fragment = document.createDocumentFragment();
 
         for (let i = 0; i < this.widthBoard * this.widthBoard; i++) {
-            const cell = new Cell;
+            const square = document.createElement('div');
+            square.innerHTML = '';
+            square.className = 'cell';
+            this.dom = square;
 
-            fragment.appendChild(cell.getNewElement());
-            this.squares.push(cell);
+            fragment.appendChild(square);
+            this.squares.push(square);
         }
         this.wrapper.appendChild(fragment);
     }
-}
 
-function generateNewCell() {
-    const randomNumber = Math.floor(Math.random() * this.squares.length);
-
-    if (this.squares[randomNumber].innerHTML === '') {
-        this.squares[randomNumber].innerHTML = 2;
-        addColours();
-        // проверить на GameOver
-    } else {
-        this.generateNewCell();
+    generateNewCell() {
+        const randomNumber = Math.floor(Math.random() * this.squares.length);
+    
+        if (this.squares[randomNumber].innerHTML === '') {
+            this.squares[randomNumber].innerHTML = 2;
+        } else {
+            this.generateNewCell();
+        }
+    } 
+    
+    addColours() {
+        for (let i = 0; i < this.squares.length; i++) {
+            this.squares[i].style.backgroundColor = colorCell[Math.trunc(Math.sqrt(this.squares[i].innerHTML))];
+        }
     }
-}  
 
-function addColours() {
-    for (let i = 0; i < this.squares.length; i++) {
-        this.squares[i].style.backgroundColor = colorCell[Math.trunc(Math.sqrt(this.squares[i].innerHTML))];
-    }
 }
 
 class Cell {
-    constructor(value, dom) {
+    constructor() {
         this.value = '';
         this.dom = null;
     }
@@ -73,12 +85,6 @@ class Cell {
     }
 
     getNewElement() {
-        const square = document.createElement('div');
-        square.innerHTML = '';
-        square.className = 'grid-cell ';
-        this.dom = square;
-
-        return square;
     }
 }
 
@@ -89,7 +95,7 @@ class GameManager{
             this.board = null;
         }
 
-    clickControl (event) {
+        clickControl (event) {
         if (event.key === 'ArrowUp') {
             console.log('Вы нажали клавишу вверх!')
         } else if (event.key === 'ArrowLeft') {
@@ -99,13 +105,15 @@ class GameManager{
         } else if (event.key === 'ArrowDown') {
             console.log('Вы нажали клавишу вниз!');
             }
+    
     }
     init() {
-    this.board = new Board();
-    this.board.init();
-    document.addEventListener('keyup', this.clickControl);
-    this.generateNewCell;
-    } 
+        this.board = new Board()
+        this.board.init()
+        this.board.generateNewCell();
+        document.addEventListener('keyup', this.clickControl);
+        }  
+    
 }      
 
 const start = new GameManager();
