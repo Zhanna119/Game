@@ -18,18 +18,7 @@ const colorCell = [
 ];
 
 
-//checkIsGameOver();
-function generateNewCell() {
-    const randomNumber = Math.floor(Math.random() * this.squares.length);
-
-    if (this.squares[randomNumber].innerHTML === '') {
-        this.squares[randomNumber].innerHTML = 2;
-    } else {
-        this.generateNewCell();
-    }
-}  
-
-
+//checkIsGameOver(); 
 class Board {
     constructor() {
         this.widthBoard = 4;
@@ -56,6 +45,7 @@ class Board {
         const randomNumber = Math.floor(Math.random() * this.squares.length);
     
         if (this.squares[randomNumber].innerHTML === '') {
+            this.addColours();
             this.squares[randomNumber].innerHTML = 2;
         } else {
             this.generateNewCell();
@@ -110,6 +100,7 @@ class GameManager{
     init() {
         this.board = new Board()
         this.board.init()
+        this.board.generateNewCell();
         this.board.generateNewCell();
         document.addEventListener('keyup', this.clickControl);
         }  
