@@ -19,64 +19,10 @@ const colorCell = [
 
 
 //checkIsGameOver(); 
-class Board {
-    constructor() {
-        this.widthBoard = 4;
-        this.squares = [];
-        this.wrapper = document.querySelector('.grid');
-    }
 
-    init() {
-        const fragment = document.createDocumentFragment();
+import Board from "./utils.js";
 
-        for (let i = 0; i < this.widthBoard * this.widthBoard; i++) {
-            const square = document.createElement('div');
-            square.innerHTML = '';
-            square.className = 'cell';
-            this.dom = square;
-
-            fragment.appendChild(square);
-            this.squares.push(square);
-        }
-        this.wrapper.appendChild(fragment);
-    }
-
-    generateNewCell() {
-        const randomNumber = Math.floor(Math.random() * this.squares.length);
-    
-        if (this.squares[randomNumber].innerHTML === '') {
-            this.addColours();
-            this.squares[randomNumber].innerHTML = 2;
-        } else {
-            this.generateNewCell();
-        }
-    } 
-    
-    addColours() {
-        for (let i = 0; i < this.squares.length; i++) {
-            this.squares[i].style.backgroundColor = colorCell[Math.trunc(Math.sqrt(this.squares[i].innerHTML))];
-        }
-    }
-
-}
-
-class Cell {
-    constructor() {
-        this.value = '';
-        this.dom = null;
-    }
-
-    getValue () {
-        return this.value; 
-    }
-
-    setValue() {
-
-    }
-
-    getNewElement() {
-    }
-}
+import Cell from "./utils1.js";
 
 class GameManager{
         constructor() {
