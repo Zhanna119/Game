@@ -1,3 +1,5 @@
+import Cell from "./Cell";
+
 const colorCell = [
     '#afa192', 
     '#eee4da', 
@@ -24,12 +26,9 @@ export default class Board {
         const fragment = document.createDocumentFragment();
 
         for (let i = 0; i < this.widthBoard * this.widthBoard; i++) {
-            const square = document.createElement('div');
-            square.innerHTML = '';
-            square.className = 'cell';
-            this.dom = square;
+            const square = new Cell();
 
-            fragment.appendChild(square);
+            fragment.appendChild(square.getNewElement());
             this.squares.push(square);
         }
         this.wrapper.appendChild(fragment);
@@ -38,9 +37,9 @@ export default class Board {
     generateNewCell() {
         const randomNumber = Math.floor(Math.random() * this.squares.length);
     
-        if (this.squares[randomNumber].innerHTML === '') {
+        if (this.squares[randomNumber].getValue() === '') {
             this.addColours();
-            this.squares[randomNumber].innerHTML = 2;
+            this.squares[randomNumber].setValue(2);
         } else {
             this.generateNewCell();
         }
