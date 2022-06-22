@@ -1,4 +1,5 @@
-export default class Cell {
+export class Cell {
+
     constructor() {
         this.value = '';
         this.dom = null;
@@ -26,3 +27,6 @@ export default class Cell {
         return square;
     }
 }
+
+
+
