@@ -62,7 +62,7 @@ export class Board {
             let filteredRow = row.filter(num => num);
             let emptyCellInRowSize = this.widthBoard - filteredRow.length;
     
-            let newRow = this.makeNewSequence1(filteredRow, emptyCellInRowSize, isLeft);
+            let newRow = this.makeNewSequence(filteredRow, emptyCellInRowSize, isLeft);
     
             newRow.forEach((value, i) => {
                 this.squares[rowIndex + i].setValue(value);
@@ -110,3 +110,5 @@ export class Board {
         }
     }
 }
+
+import {Cell} from "./Cell.js";
