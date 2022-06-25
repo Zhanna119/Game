@@ -1,12 +1,12 @@
 'use strict';
 
-const scoreDisplay =  document.querySelector('.score');
+import { Board } from './Board.js';
+import { Cell } from "./Cell.js";
+
+const scoreDisplay = document.querySelector('.score');
 const resultDisplay = document.querySelector('.result');
 
-//checkIsGameOver(); 
-
-import {Board} from "./Board.js";
-import {Cell} from "./Cell.js";
+// checkIsGameOver();
 
 class GameManager{
         constructor() {
@@ -14,8 +14,7 @@ class GameManager{
             this.score = 0;
             this.board = null;
         }
-
-        clickControl (event) {
+        clickControl(event) {
         if (event.key === 'ArrowUp') {
             this.board.combineColumn();
             this.board.generateNewCell();
@@ -33,20 +32,15 @@ class GameManager{
             this.board.generateNewCell();
             this.board.movingColumn();
             }
-    
     }
     init() {
-        this.board = new Board()
-        this.board.init()
+        this.board = new Board();
+        this.board.init();
         this.board.generateNewCell();
         this.board.generateNewCell();
         document.addEventListener('keyup', this.clickControl.bind(this));
-        }  
-}  
+        }
+}
 
 const start = new GameManager();
 start.init();
-
-
-
-
