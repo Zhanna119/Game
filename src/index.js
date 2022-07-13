@@ -1,5 +1,6 @@
 'use strict';
 
+import '../style.css';
 import { Board } from './Board.js';
 import { Cell } from './Cell.js';
 

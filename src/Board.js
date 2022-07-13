@@ -29,16 +29,17 @@ export class Board {
         }
     }
     // объединение значений в столбцах
-            fillColumn(indexColumn, isUp) {
-            const column = [];
-            for (let i = 0; i < this.widthBoard; i++) {
-                column.push(this.squares[indexColumn + this.widthBoard * i ].getValue());
+    fillColumn(indexColumn, isUp) {
+        const column = [];
+        for (let i = 0; i < this.widthBoard; i++) {
+        column.push(this.squares[indexColumn + this.widthBoard * i ].getValue());
             }
-            const filteredColumn = column.filter(num => num);
-            const emptyCellInColumnSize = this.widthBoard - filteredColumn.length;
-            const newColumn = this.makeNewSequence(filteredColumn, emptyCellInColumnSize, isUp);
-            newColumn.forEach((value, i) => {
-                this.squares[indexColumn + (this.widthBoard * i)].setValue(value);
+        const filteredColumn = column.filter(num => num);
+        const emptyCellInColumnSize = this.widthBoard - filteredColumn.length;
+        const newColumn = this.makeNewSequence(filteredColumn, emptyCellInColumnSize, isUp);
+        
+        newColumn.forEach((value, i) => {
+        this.squares[indexColumn + (this.widthBoard * i)].setValue(value);
             });
         }
         // объединение значений в строках

@@ -31,6 +31,11 @@ const config = {
                 type: 'asset',
             },
 
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],
@@ -42,7 +47,7 @@ module.exports = () => {
         config.mode = 'production';
         
         
-        config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
+        //config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
         
     } else {
         config.mode = 'development';
